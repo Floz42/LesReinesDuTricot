@@ -1,0 +1,78 @@
+/************** GENERAL **************/
+
+@import url('https://fonts.googleapis.com/css?family=Bangers&display=swap');
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Bold";
+    src: url("../fonts/Poppins-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Thin";
+    src: url("../fonts/Poppins-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Light";
+    src: url("../fonts/Poppins-Light.ttf") format("truetype");
+}
+html {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+body {
+    font-family: "Poppins" !important;
+    font-size: 2em;
+}
+
+p {
+    font-family: "Poppins" !important;
+}
+
+ul {
+    list-style: none;
+}
+
+.image_rounded_medium {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid silver;
+}
+
+.container_top, .jumbotron {
+    margin-top:5em;
+}
+
+/************************* NAVBAR **************************/
+
+nav {
+    width: 100%;
+    position: fixed !important;
+    z-index: 1000;
+    top: 0;
+}
+
+/************************* ABOUT US **************************/
+
+.introduce_images {
+    margin-top: 2em;
+    display: flex; 
+    justify-content: center;
+}
+
+.one_image {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+/************************* PRODUCTS **************************/
+ .cat_title {
+     font-size: 2em !important;
+ }
