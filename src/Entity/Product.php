@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -19,26 +20,31 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products:show"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"products:show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"products:show"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products:show"})
      */
     private $picture;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
+     * @Groups({"products:show"})
      */
     private $category;
 
@@ -49,6 +55,7 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"products:show"})
      */
     private $quantity;
 

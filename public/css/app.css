@@ -49,6 +49,14 @@ ul {
     margin-top:5em;
 }
 
+#alerts {
+    margin-top: 5em;
+} 
+
+.table-hover tr:hover {
+    background-color: rgb(247, 157, 157) !important;
+}
+
 /************************* NAVBAR **************************/
 
 nav {
@@ -73,6 +81,15 @@ nav {
 }
 
 /************************* PRODUCTS **************************/
+
  .cat_title {
      font-size: 2em !important;
  }
+
+ /************************ PICTURES **************************/
+
+.mini_picture {
+    width: 80px;
+    height: 80px; 
+    border-radius: 50%;
+}

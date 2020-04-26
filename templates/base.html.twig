@@ -30,3 +30,16 @@
         </script>
     </body>
 </html>
+<script>
+$('.answer_faq').each(function() {
+    $(this).hide();
+});
+
+$('.question_faq').each(function() {
+    $(this).click(function() {
+        $(this).next().toggle('fast');
+    })
+})
+;
+
+</script>

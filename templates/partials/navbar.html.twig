@@ -28,3 +28,15 @@
       </li>
     </ul>
 </nav>
+<div id="alerts">
+  {% for message in app.flashes('success') %}
+      <div class="alert alert-success mx-auto text-center col-md-6 col-xs-12">
+          {{ message }}
+      </div>
+  {% endfor %}
+  {% for message in app.flashes('error') %}
+      <div class="alert alert-danger mx-auto text-center col-md-6 col-xs-10">
+          {{ message }}
+      </div>
+  {% endfor %}
+</div>
