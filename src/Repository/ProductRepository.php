@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,7 +19,12 @@ class ProductRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Product::class);
     }
-
+    
+    /**
+     * lastProducts -> return the last three products added
+     *
+     * @return void
+     */
     public function lastProducts()
     {
         return $this->createQueryBuilder('p')
@@ -26,6 +32,19 @@ class ProductRepository extends ServiceEntityRepository
             ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+    
+    /**
+     * Pagination -> serve to PaginatorBundle
+     *
+     * @return Query
+     */
+    public function paginationProducts(): Query
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ;  
     }
 
     // /**

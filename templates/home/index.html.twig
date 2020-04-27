@@ -3,20 +3,19 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-<section id="introduce">
+<section id="home-item">
     {% include 'partials/introduce.html.twig' %}
 </section>
-<section id="aboutus">
+<section id="us-item">
     {% include 'partials/aboutus.html.twig' %}
 </section>
 <section id="products">
     {% include "partials/products.html.twig" %}
 </section>
-<section id="faq">
-    {% include "partials/faq.html.twig" %}
-</section>
-<section id="contact">
+<hr class="my-3" style="width:50%">
+<section id="contact-item">
     {% include "partials/contact.html.twig" %}
 </section>
+{% include "partials/footer.html.twig" %}
 
 {% endblock %}

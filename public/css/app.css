@@ -59,11 +59,19 @@ ul {
 
 /************************* NAVBAR **************************/
 
-nav {
+#navbar {
     width: 100%;
     position: fixed !important;
     z-index: 1000;
     top: 0;
+}
+
+/************************* INTRODUCE **************************/
+
+#carouselExampleControls {
+    width: 50%;
+    height: auto;
+    border-radius: 20px;
 }
 
 /************************* ABOUT US **************************/
@@ -86,10 +94,54 @@ nav {
      font-size: 2em !important;
  }
 
+ #table_products tr td, #table_category tr td {
+     vertical-align: middle;
+ }
+
  /************************ PICTURES **************************/
 
 .mini_picture {
     width: 80px;
     height: 80px; 
     border-radius: 50%;
+}
+
+/************************** FAQ *************************/
+
+#faq_answer {
+    height: 200px !important;
+}
+
+.arrow_question:hover {
+    color: rgb(28, 128, 241) !important;
+}
+
+ /************************ FOOTER **************************/
+
+ footer {
+     bottom: 0;
+     width: 100%;
+     display: flex; 
+     flex-direction: column;
+     background-color: black;
+     color: white;
+     padding: 2em;
+     justify-content: center;
+     align-items: center;
+ }
+
+ #footer_links {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+ }
+
+ #footer_links .row a {
+     text-decoration: none;
+     color: white;
+ }
+
+ #footer_links .row a:hover {
+    color: rgb(37, 142, 240);
 }
