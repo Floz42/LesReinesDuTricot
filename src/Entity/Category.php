@@ -18,14 +18,14 @@ class Category
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"category:show", "category:create"})
+     * @Groups({"category:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"products:show", "category:show", "category:create"})
-     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
+     * @Assert\NotBlank(message="Le champ 'nom' ne peut pas être vide")
      */
     private $name;
 

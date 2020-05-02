@@ -66,12 +66,15 @@ ul {
     top: 0;
 }
 
-/************************* INTRODUCE **************************/
+/************************* INTRODUCE & CAROUSEL **************************/
 
 #carouselExampleControls {
     width: 50%;
     height: auto;
-    border-radius: 20px;
+}
+
+.carousel_img {
+    border-radius: 50px !important;
 }
 
 /************************* ABOUT US **************************/
@@ -94,8 +97,8 @@ ul {
      font-size: 2em !important;
  }
 
- #table_products tr td, #table_category tr td {
-     vertical-align: middle;
+ #table_products tr td, #table_category tr td, #table_users tr td  {
+     vertical-align: middle !important;
  }
 
  /************************ PICTURES **************************/

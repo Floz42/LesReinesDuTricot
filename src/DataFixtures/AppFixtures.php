@@ -2,19 +2,31 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
+use Faker\Factory;
+use App\Entity\User;
 use App\Entity\Product;
+use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr-FR');
 
-        $category = [];
+/*         $category = [];
 
         $category1 = new Category;
         $category1->setName("Eponges");
@@ -42,6 +54,22 @@ class AppFixtures extends Fixture
                     ->setCategory($oneCategory);
             $manager->persist($product);
         }
-        $manager->flush();
+ */        
+        for($u = 0; $u < 50; $u++) {
+            $user = new User;
+            $postal = mt_rand('1000', '99000');
+            $user->setFirstname($faker->firstName)
+                 ->setLastname($faker->lastName)
+                 ->setEmail($faker->email)
+                 ->setPhoneNumber("0618111315")
+                 ->setPassword($this->passwordEncoder->encodePassword($user, 'newpass'))
+                 ->setAddress($faker->streetAddress)
+                 ->setPostalCode($postal)
+                 ->setCity($faker->city)
+                 ->setUsername($faker->userName)
+                 ;
+                 $manager->persist($user);
+        }
+         $manager->flush();
     }
 }
