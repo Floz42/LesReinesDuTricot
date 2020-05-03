@@ -15,8 +15,10 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
         <div class="dropdown-menu">
-            {% for cat in category %}
-                <a class="dropdown-item scrollTo" href="#cat-{{cat.id}}">{{ cat.name }}</a>
+            {% for cat in app.session.get('category') %}
+              {% for key, category in cat %}
+                <a class="dropdown-item scrollTo" href="#cat-{{ key }}">{{ category }}</a>
+                {% endfor %}
             {% endfor %}
         </div>
       </li>
@@ -25,6 +27,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link scrollTo" href="#contact-item">F.A.Q</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link scrollTo" href="{{path('user_subscribe')}}">S'inscrire</a>
       </li>
     </ul>
 </nav>

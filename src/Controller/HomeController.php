@@ -2,16 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
 use App\Entity\Contact;
-use App\Entity\Product;
 use App\Form\ContactType;
+use App\Service\SessionService;
+use App\Repository\FaqRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\FaqRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController
 {
@@ -29,19 +33,32 @@ class HomeController extends AbstractController
      * @var FaqRepository
      */
     private $faqRepo;
-    
 
-    public function __construct(CategoryRepository $categoryRepo, ProductRepository $productsRepo, FaqRepository $faqRepo)
+    private $session;
+    
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
+
+    public function __construct(CategoryRepository $categoryRepo, ProductRepository $productsRepo, FaqRepository $faqRepo, EntityManagerInterface $manager, SessionService $session)
     {
         $this->categoryRepo = $categoryRepo;
         $this->productsRepo = $productsRepo;
         $this->faqRepo = $faqRepo;
+        $this->manager = $manager;
+        $session->setSession();
     }
 
     /**
      * @Route("/", name="home")
+     * 
+     * @param \Swift_Mailer $mailer
+     * @param Request $request
+     * 
+     * @return Response
      */
-    public function index(\Swift_Mailer $mailer, Request $request)
+    public function index(\Swift_Mailer $mailer, Request $request): Response
     {
         $contact = new Contact(); 
 
@@ -54,19 +71,11 @@ class HomeController extends AbstractController
             } else {
                 $data = $form_contact->getData();
                 $message = (new \Swift_Message())
-                        ->setSubject('Nouveau message de ton site !')
+                        ->setSubject('Nouveau message de votre site !')
                         ->setFrom($data->getEmail())
                         ->setTo('flo.carreclub@gmail.com')
                         ->setContentType('text/html')
-                        ->setBody(
-                            '<html>' . 
-                                '<body>' . 
-                                    'Nouveau message de : '. $data->getFirstname() . ' ' . $data->getLastname() . '<br>' .
-                                    'Son e-mail : '. $data->getEmail() . '<br>' .
-                                    'Contenu du message : ' . $data->getMessage() . '<br>' .
-                                '</body>' . 
-                            '</html>' 
-                        );
+                        ->setBody($this->renderView('partials/mails/contact.html.twig', ['data' => $data ]));
                 $mailer->send($message);
                 $this->addFlash('success', "Votre message a été envoyé avec succès.");
                 return $this->redirectToRoute('home');
@@ -84,12 +93,45 @@ class HomeController extends AbstractController
 
     /** 
     * @Route("/product/show/{id}", name="show_product")
+    *
+    * @param Int $id
+    *
+    * @return Response
     */
-    public function show_product($id, Product $product) 
+    public function show_product(Int $id): Response 
     {
         return $this->render('home/products/show_product.html.twig', [
-            'category' => $this->categoryRepo->findAll(),
             'product' => $this->productsRepo->find($id)
         ]);
     }
+
+    /**
+     * @Route("/user/subscribe", name="user_subscribe")
+     * 
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * 
+     * @return Response
+     */
+    public function subscribe(Request $request, UserPasswordEncoderInterface $encoder): Response
+    {
+        $user = new User;
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $passwordCrypt = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($passwordCrypt);
+            $this->manager->persist($user);
+            $this->manager->flush();
+            $this->addFlash('success', "Votre inscription a bien été prise en compte.");
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('partials/subscribe.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
