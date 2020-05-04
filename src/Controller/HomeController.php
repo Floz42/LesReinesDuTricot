@@ -47,7 +47,7 @@ class HomeController extends AbstractController
         $this->productsRepo = $productsRepo;
         $this->faqRepo = $faqRepo;
         $this->manager = $manager;
-        $session->setSession();
+        $this->session = $session;
     }
 
     /**
