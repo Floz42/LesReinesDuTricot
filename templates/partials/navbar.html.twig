@@ -31,6 +31,12 @@
       <li class="nav-item">
         <a class="nav-link scrollTo" href="{{path('user_subscribe')}}">S'inscrire</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link scrollTo" href="{{ path('cart_index')}}">Votre panier 
+          {% if app.session.get('totalproducts') > 0 %}
+                    ( {{app.session.get('totalproducts')}} )</a>
+          {% endif %}
+      </li>
     </ul>
 </nav>
 <div id="alerts">
