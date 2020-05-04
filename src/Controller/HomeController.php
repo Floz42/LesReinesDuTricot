@@ -105,33 +105,4 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/user/subscribe", name="user_subscribe")
-     * 
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $encoder
-     * 
-     * @return Response
-     */
-    public function subscribe(Request $request, UserPasswordEncoderInterface $encoder): Response
-    {
-        $user = new User;
-        $form = $this->createForm(UserType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $passwordCrypt = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($passwordCrypt);
-            $this->manager->persist($user);
-            $this->manager->flush();
-            $this->addFlash('success', "Votre inscription a bien été prise en compte.");
-            return $this->redirectToRoute('home');
-        }
-
-        return $this->render('partials/subscribe.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
 }

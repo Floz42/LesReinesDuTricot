@@ -34,8 +34,9 @@
       <li class="nav-item">
         <a class="nav-link scrollTo" href="{{ path('cart_index')}}">Votre panier 
           {% if app.session.get('totalproducts') > 0 %}
-                    ( {{app.session.get('totalproducts')}} )</a>
+                    ( {{app.session.get('totalproducts')}} )
           {% endif %}
+        </a>
       </li>
     </ul>
 </nav>

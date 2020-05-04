@@ -6,8 +6,10 @@ use Faker\Factory;
 use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\TokenUser;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\CssSelector\Parser\Token;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -20,6 +22,15 @@ class AppFixtures extends Fixture
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
+    }
+
+    public function random_string(){
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $string = '';
+        for($i=0; $i<25; $i++){
+            $string .= $chars[rand(0, strlen($chars)-1)];
+        }
+        return $string;
     }
 
     public function load(ObjectManager $manager)
@@ -54,9 +65,10 @@ class AppFixtures extends Fixture
                     ->setCategory($oneCategory);
             $manager->persist($product);
         }
- */        
+ */     
         for($u = 0; $u < 50; $u++) {
             $user = new User;
+            $token = new TokenUser;
             $postal = mt_rand('1000', '99000');
             $user->setFirstname($faker->firstName)
                  ->setLastname($faker->lastName)
@@ -69,6 +81,12 @@ class AppFixtures extends Fixture
                  ->setUsername($faker->userName)
                  ;
                  $manager->persist($user);
+            
+            $token->setUserId($user)
+                  ->setStatus("pending")
+                  ->setToken($this->random_string());
+           $manager->persist($token);
+
         }
          $manager->flush();
     }
