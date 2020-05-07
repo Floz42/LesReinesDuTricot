@@ -19,12 +19,17 @@ security:
 
             provider: in_database
 
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 2592000 # 30 days in seconds
+
             form_login: 
                 login_path: login
                 check_path: login
 
             logout: 
                 path: logout
+                target: logout_message
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

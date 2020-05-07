@@ -18,7 +18,7 @@
             {% for cat in app.session.get('category') %}
               {% for key, category in cat %}
                 <a class="dropdown-item scrollTo" href="#cat-{{ key }}">{{ category }}</a>
-                {% endfor %}
+              {% endfor %}
             {% endfor %}
         </div>
       </li>
