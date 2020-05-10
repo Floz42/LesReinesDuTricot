@@ -29,5 +29,11 @@ services:
         arguments:
             $templatePath: 'partials/pagination.html.twig'
 
+    App\EventListener\LoginListener:
+        tags: 
+            - { name: 'kernel.event_listener', event: 'security.authentication.success' }
+
+           
+
 
 

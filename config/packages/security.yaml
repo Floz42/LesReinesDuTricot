@@ -26,10 +26,13 @@ security:
             form_login: 
                 login_path: login
                 check_path: login
+                csrf_token_generator: security.csrf.token_manager
+                default_target_path: post_login
 
             logout: 
                 path: logout
-                target: logout_message
+                target: login
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

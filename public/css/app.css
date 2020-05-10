@@ -57,6 +57,10 @@ ul {
     background-color: rgb(247, 157, 157) !important;
 }
 
+.avatar {
+    width: 200px;
+    height: auto;
+}
 /************************* NAVBAR **************************/
 
 #navbar {
@@ -64,6 +68,12 @@ ul {
     position: fixed !important;
     z-index: 1000;
     top: 0;
+}
+
+.avatar-navbar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
 }
 
 /************************* INTRODUCE & CAROUSEL **************************/

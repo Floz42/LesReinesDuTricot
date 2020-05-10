@@ -17,18 +17,18 @@
         <title>LesReinesDuTricot - {% block title %}Bienvenue{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
-    <div id="alerts">
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success mx-auto text-center col-md-6 col-xs-12">
-                {{ message }}
-            </div>
-        {% endfor %}
-        {% for message in app.flashes('error') %}
-            <div class="alert alert-danger mx-auto text-center col-md-6 col-xs-10">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
+        <div id="alerts">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success mx-auto text-center col-md-6 col-xs-12">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger mx-auto text-center col-md-6 col-xs-10">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
     <body>
         {% include 'partials/navbar.html.twig' %}
         {% block body %}{% endblock %}
@@ -37,28 +37,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script type="module" src="{{ asset('/js/app.js') }}"></script>
-        <script>
-
-/* alert("haha")
-$('#subsribe_button').click(function(e) {
-  $('#modal_subscribe').modal();
-    alert("haha");
-    e.preventDefault();
-    $.get("user/subscribe", function(data) {
-        $('.modal-body').html(data);
-        $('#modal_subscribe').modal('show');
-    })
-})
-let ok = $('#user_firstname').val();
-ok.change(function() {
-  alert("héhé");
-}) */
-
-</script>
         {% block javascripts %}{% endblock %}
         <script>
             AOS.init();
         </script>
+    {% include "partials/footer.html.twig" %}
     </body>
 </html>
 
