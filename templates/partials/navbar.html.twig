@@ -40,7 +40,7 @@
       {% if app.user %}
         <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
-                <img src="/images/users/{{ app.user.picture }}" alt="Avatar de {{ app.user.fullName }}" class="avatar-navbar mr-2"> {{ app.user.username }}
+                <img src="/images/users/{{ app.user.imageProfile.image }}" alt="Avatar de {{ app.user.fullName }}" class="avatar-navbar mr-2"> {{ app.user.username }}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
                 <a href="{{ path('user_profile')}}" class="dropdown-item">Mon compte</a>

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\TokenUser;
+use App\Entity\ImageProfile;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\CssSelector\Parser\Token;
@@ -86,7 +87,9 @@ class AppFixtures extends Fixture
                   ->setStatus("pending")
                   ->setToken($this->random_string());
            $manager->persist($token);
-
+           $profileImage = new ImageProfile();
+           $profileImage->setUser($user);
+           $manager->persist($profileImage);
         }
          $manager->flush();
     }
