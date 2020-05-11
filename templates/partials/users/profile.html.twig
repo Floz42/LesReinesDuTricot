@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Votre profile{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="text-center my-3">Votre profil utilisateur :</h1>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 m-auto text-center">
+                <div class="col-12">
+                    <img src="/images/users/{{user.imageProfile.image }}" alt="{{ user.fullName }}" class="avatar">
+                </div>
+                <div class="row text-center p-1 mt-5">
+                    {% if user is same as(app.user) %}
+                        <div class="col-6">
+                            <a href="{{ path('update_profile') }}" class="btn btn-primary">Modifier mon profil</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ path('change_password')}}" class="btn btn-secondary">Changer mon mot de passe</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Pseudo : </td>
+                            <td>{{ user.username }} </td>
+                        </tr>
+                        <tr>
+                            <td>Prénom :</td>
+                            <td>{{ user.firstname }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nom :</td>
+                            <td>{{ user.lastname }}</td>
+                        </tr>
+                        <tr>
+                            <td>Numéro de téléphone :</td>
+                            <td>{{ user.phoneNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td>Abonné à la newsletter ?</td>
+                            <td>{{ user.receiveNewsletter == 1 ? 'Oui' : 'Non' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="text-center">Adresse :</th>
+                        </tr>
+                        <tr>
+                            <td>Numéro, voie :</td>
+                            <td>{{ user.address }}</td>
+                        </tr>
+                        <tr>
+                            <td>Code postale, ville :</td>
+                            <td>{{ user.postalCode}}, {{ user.city }}</td>
+                        </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <h2 class="text-center my-3">Vos commandes :</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Date</td>
+                        <td>Numéro de commande</td>
+                        <td>Total (TTC)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="text-center"><i>Aucune commande pour le moment</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

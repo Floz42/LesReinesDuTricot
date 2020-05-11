@@ -1,0 +1,58 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Administration des produits{% endblock %}
+
+{% block body %}
+    <div class="container my-3">
+        <h1 class="my-3">Administration de vos produits</h1>
+        <a href="{{ path('admin_products_add')}}" class="btn btn-success mb-3">
+            <i class="fas fa-plus mr-1"></i>
+            Ajouter un produit
+        </a>
+        <table id="table_products" class="table table-striped table-hover mt-3 m-auto">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Catégorie</th>
+                    <th>Quantité</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in pagination.data %} 
+                    <tr>
+                        <td>
+                            <img src="{{ product.picture }}" alt="product.title" class="mini_picture">
+                        </td>
+                        <td>{{ product.title }}</td>
+                        <td>{{ product.description }}</td>
+                        <td><strong>{{ product.price }}</strong></td>
+                        <td><span class="badge badge-success">{{ product.category.name }}</span></td>
+                        <td class="align-items-center">
+                            {% if product.quantity < 5 %}
+                                <span class="badge badge-danger">{{ product.quantity }}</span>
+                            {% else %}
+                                {{ product.quantity }} 
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('admin_products_update', {id: product.id})}}" class="btn btn-primary mb-2">
+                                <i class="fas fa-pen" title="Modifier"></i>
+                            </a>
+                            <a href="{{ path('admin_products_delete', {id: product.id})}}" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigator mt-3">
+            {{ pagination.display() }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier vos informations personnelles{% endblock %}
+
+{% block body %}
+    <div class="container my-3">
+        <h1 class="my-3 text-center">Modifier vos informations personnelles</h1>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-success">
+                <i class="fas fa-check mr-1"></i>
+                Valider
+            </button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container my-3">
+        <h1>Vous inscrire :</h1>
+        {{ form_start(form, {'action': path('user_subscribe')}) }}
+            {{ form_widget(form) }}
+            <button id="subscribe_button" class="btn btn-primary">Valider</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

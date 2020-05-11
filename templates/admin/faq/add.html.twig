@@ -1,0 +1,22 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Gestion de la FAQ{% endblock %}
+
+{% block body %}
+    <div class="container my-3">
+        <h1 class="my-3 text-center">
+            {% if exist %}
+                Modification d'une question/réponse
+            {% else %}
+                Ajout d'une question/réponse        
+            {% endif %}
+        </h1>
+        <div class="mx-auto col-md-6 col-xs-12 border border-primary rounded p-5">
+            {{ form_start(form)}}
+            {{form_widget(form)}}
+            <button class="btn btn-success">Valider</button>
+            {{form_end(form)}}
+        </div>
+    </div>
+
+{% endblock %}

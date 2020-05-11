@@ -1,0 +1,57 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-3 text-center">Gestion de vos utilisateurs</h1>
+        <table id="table_users" class="table table-hover table-striped table-responsive align-items-center">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Code postale</th>
+                    <th>Ville</th>
+                    <th>Enregistré le</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in pagination.data %}
+                    <tr>
+                        <td>
+                            <img src="images/users/{{user.imageProfile.image}}" alt="{{ user.fullName }}" class="mini_picture">
+                        </td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.fullName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phoneNumber }}</td>
+                        <td>{{ user.address }}</td>
+                        <td>{{ user.postalCode }}</td>
+                        <td>{{ user.city }}</td>
+                        <td>{{ user.createdAt | date('d/m/Y') }}</td>
+                        <td>
+                         {% for role in user.roles %}
+                            {{ role }}
+                        {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{{ path('admin_users_delete', {'id': user.id })}}" class="btn btn-danger">
+                                <i class="fas fa-trash" title="Supprimer"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigator mt-3">
+            {{ pagination.display() }}
+        </div>
+    </div>
+
+{% endblock %}

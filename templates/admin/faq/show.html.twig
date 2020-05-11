@@ -1,0 +1,42 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Administration de la FAQ{% endblock %}
+
+{% block body %}
+    <div class="container my-3">
+        <h1 class="my-3">Administration de votre foire aux questions</h1>
+        <a href="{{ path('admin_faq_add')}}" class="btn btn-success mb-3">
+            <i class="fas fa-plus mr-1"></i>
+            Ajouter une question/réponse
+        </a>
+        <div class="col-md-8 col-xs-12 mx-auto">
+            <table id="table_category" class="table table-striped table-hover mt-3 m-auto">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Question</th>
+                        <th>Réponse</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for question in faq %} 
+                        <tr>
+                            <td>{{ question.id }}</td>
+                            <td>{{ question.question }}</td>
+                            <td>{{ question.answer }}</td>
+                            <td>
+                                <a href="{{ path('admin_faq_update', {id: question.id})}}" class="btn btn-primary mb-1">
+                                    <i class="fas fa-pen" title="Modifier"></i>
+                                </a>
+                                <a href="{{ path('admin_faq_delete', {id: question.id})}}" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

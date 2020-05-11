@@ -1,0 +1,49 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Administration des catégories{% endblock %}
+
+{% block body %}
+    <div class="container my-3">
+        <h1 class="my-3">Administration de vos catégories</h1>
+        <div class="alert alert-warning">IMPORTANT : si vous supprimez une catégorie, celà supprimera tous les produits qui y sont associés.</div>
+        <a href="{{ path('admin_category_add')}}" class="btn btn-success mb-3">
+            <i class="fas fa-plus mr-1"></i>
+            Ajouter une catégorie de produits
+        </a>
+        <div class="col-md-8 col-xs-12 mx-auto">
+            <table id="table_category" class="table table-striped table-hover mt-3 m-auto">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th class="text-center">Nombre de produits associés</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cat in category %} 
+                        {% set total = 0 %}
+                        {% for product in products %}
+                            {% if product.category.id == cat.id %}
+                                {% set total = total + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        <tr>
+                            <td>{{ cat.id }}</td>
+                            <td>{{ cat.name }}</td>
+                            <td class="text-center"><strong>{{ total }}</strong></td>
+                            <td>
+                                <a href="{{ path('admin_category_update', {id: cat.id})}}" class="btn btn-primary">
+                                    <i class="fas fa-pen" title="Modifier"></i>
+                                </a>
+                                <a href="{{ path('admin_category_delete', {id: cat.id})}}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette catégorie ?');">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

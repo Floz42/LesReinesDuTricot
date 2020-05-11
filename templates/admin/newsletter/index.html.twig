@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Envoie d'un mail à la newsletter{% endblock %}
+
+{% block body %}
+    <div class="container my-3">
+        <div class="col-md-6 col-xs-12 border border-primary rounded p-3 mx-auto">
+            <h2 class="my-3 text-center">Envoyer un message à vos abonnés</h2>
+            {{ form_start(form) }}
+                {{ form_row(form.destinations, { 'value': users | join(", ")})}}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary">
+                    <i class="fas fa-check mr-1"></i>
+                    Envoyer
+                </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+  <script src="https://cdn.tiny.cloud/1/ewzsiip33a1my2zwspbb5uuxo8dg1o815xvg6xd2ky41dyb2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+    });
+    </script
+{% endblock %}

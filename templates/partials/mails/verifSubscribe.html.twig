@@ -1,0 +1,21 @@
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">      
+</head>
+<style>
+body, p {
+    font-family: 'Roboto';
+}
+</style>
+    <body>
+        <div class="container p-3 mx-auto">
+            <p>Bonjour.
+            Merci de vous être inscrit sur LesReinesDuTricot</p>
+            <p class="my-3">Il ne vous reste plus qu'à valider votre inscription en cliquant sur le lien suivant (ou en copiant/collant le lien dans votre navigateur)</p>
+            <a href="{{host}}/user/confirm?user={{ userEmail }}&token={{ token }}">{{host}}/user/confirm?user={{ userEmail }}&token={{ token }}</a>
+        </div>
+    </body>
+</html>
