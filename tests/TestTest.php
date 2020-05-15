@@ -10,8 +10,10 @@ class TestTest extends TestCase
     {
         $a = 5;
         $b = 5;
+        $c = 6;
 
         $this->assertEquals($a,$b);
+        $this->assertEquals($a,$c);
     }
 
 }
