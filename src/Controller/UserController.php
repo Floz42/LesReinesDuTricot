@@ -202,19 +202,23 @@ class UserController extends AbstractController
         $updatePassword = new UpdatePassword(); 
 
          $arrayVerify = $userService->verificationsBeforeUpdatePassword();
+         
          if ($arrayVerify !== null) {
             extract($arrayVerify);   
             if ($user && $user->getTokenUser()->getRescueToken() === null) {
                 $this->addFlash("error", "ERREUR : Vous avez déjà réinitialisé votre mot de passe.");
                 return $this->redirectToRoute('home');                
             }      
+
             $form = $this->createForm(UpdatePasswordType::class, $updatePassword);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+
                 if (!(password_verify($updatePassword->getVerificationCode(), $user->getTokenUser()->getRescueToken()))) {
                     $this->addFlash("error", "Le code de validation n'est pas le bon ...");
                     return $this->redirect($request->getUri());
                 }
+
                 $passwordCrypt = $encoder->encodePassword($user, $updatePassword->getNewPassword());
                 $user->setPassword($passwordCrypt);
                 $user->getTokenUser()->setRescueToken(NULL);
