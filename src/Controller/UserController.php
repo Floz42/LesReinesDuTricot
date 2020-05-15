@@ -106,14 +106,15 @@ class UserController extends AbstractController
     {
 
         $confirm = $userService->verifyEmail();
-        if ($confirm === "already_verified") {
-            $this->addFlash("success", "Votre compte a déjà été validé, vous pouvez vous connecter.");
-        } elseif ($confirm === "verified") {
-            $this->addFlash("success", "Votre compte a été activé avec succès, vous pouvez maintenant vous connecter.");        
-        } elseif ($confirm ==="error") {
-            $this->addFlash("error", "Il y a eut une erreur lors de la confirmation, merci de contacter le support"); 
+        if ($confirm) {
+            if ($confirm === "already_verified") {
+                $this->addFlash("success", "Votre compte a déjà été validé, vous pouvez vous connecter.");
+            } elseif ($confirm === "verified") {
+                $this->addFlash("success", "Votre compte a été activé avec succès, vous pouvez maintenant vous connecter.");        
+            } elseif ($confirm ==="error") {
+                $this->addFlash("error", "Il y a eut une erreur lors de la confirmation, merci de contacter le support"); 
+            }
         }
-
         return $this->redirectToRoute("home");
     }
 
@@ -201,8 +202,12 @@ class UserController extends AbstractController
         $updatePassword = new UpdatePassword(); 
 
          $arrayVerify = $userService->verificationsBeforeUpdatePassword();
-         extract($arrayVerify);
-         if ($verify) {
+         if ($arrayVerify !== null) {
+            extract($arrayVerify);   
+            if ($user && $user->getTokenUser()->getRescueToken() === null) {
+                $this->addFlash("error", "ERREUR : Vous avez déjà réinitialisé votre mot de passe.");
+                return $this->redirectToRoute('home');                
+            }      
             $form = $this->createForm(UpdatePasswordType::class, $updatePassword);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -224,9 +229,7 @@ class UserController extends AbstractController
                 'form' => $form->createView()
             ]);
          }
-         $this->addFlash("error", "ERREUR : Vous avez déjà réinitialisé votre mot de passe.");
          return $this->redirectToRoute('home');
-
     }
 
     /**

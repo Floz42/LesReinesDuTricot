@@ -29,6 +29,9 @@ class ApiController extends AbstractController
      */
     private $categoryRepo;
 
+    /**
+     * @var FormErrorService
+     */
     private $formErrorService;
 
 
@@ -52,7 +55,7 @@ class ApiController extends AbstractController
 
     /**
      * Return one product present in the database
-     * @Route("/api/v1/products/show/{id}", name="api_products_show", methods={"GET"})
+     * @Route("/api/v1/products/show/{id}", name="api_products_show_one", methods={"GET"})
      * 
      * @var Product $product
      * 
@@ -64,7 +67,7 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/products/show/last", name="api_products_show_last", methods={"GET"})
+     * @Route("/api/v1/products/show/last/products", name="api_products_show_last", methods={"GET"})
      * 
      * @return Response
      */
@@ -167,4 +170,4 @@ class ApiController extends AbstractController
         return $this->json($this->formErrorService->serializeErrors($form), 400);
 
     }
-    }
+}

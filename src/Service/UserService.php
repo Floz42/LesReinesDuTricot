@@ -65,7 +65,7 @@ class UserService {
         $email = $this->request->query->get("user");
 
         $user = $this->userRepo->findOneBy(["email" => $email]);
-        if($user->getTokenUser()->getStatus() === "verified") {
+        if($user && $user->getTokenUser()->getStatus() === "verified") {
             return $status = "already_verified";
         } elseif(!empty($user) && $user->getTokenUser()->getToken() === $token && $user->getTokenUser()->getStatus() === "pending") {
             $user->getTokenUser()->setStatus("verified");
@@ -138,20 +138,22 @@ class UserService {
     
     /**
      * verificationsBeforeUpdatePassword
-     *
-     * @return array
-     */
-    public function verificationsBeforeUpdatePassword(): array 
+    */
+    public function verificationsBeforeUpdatePassword() 
     {
         $token = $this->request->query->get("rescueToken");
         $email = $this->request->query->get("user");
 
-        $user = $this->userRepo->findOneBy(["email" => $email]);
-        $password = $user->getTokenUser()->getRescueToken();
-        
-        $verify = password_verify($token, $password);
+        if ($email && $token) {
+            $user = $this->userRepo->findOneBy(["email" => $email]);
+            $password = $user->getTokenUser()->getRescueToken();
+            
+            $verify = password_verify($token, $password);
 
-        return compact("user", "verify");
+            return compact("user", "verify");
+        }
+
+        return;
     }
     
 }
