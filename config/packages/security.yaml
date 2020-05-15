@@ -10,11 +10,14 @@ security:
                 class: App\Entity\User
                 property: username
 
-    firewalls:
+    firewalls:         
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/
+            user_checker: App\Security\UserChecker
             anonymous: lazy
 
             provider: in_database

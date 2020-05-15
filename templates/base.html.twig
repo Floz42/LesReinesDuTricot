@@ -29,6 +29,11 @@
                 </div>
             {% endfor %}
         </div>
+        <div>
+            {% if error_login is defined %}
+               <div class="alert alert-warning">{{ error_login }}</div> 
+            {% endif %}
+        </div>
     <body>
         {% include 'partials/navbar.html.twig' %}
         {% block body %}{% endblock %}

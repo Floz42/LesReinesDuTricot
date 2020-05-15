@@ -7,16 +7,19 @@ use App\Form\UserType;
 use App\Entity\TokenUser;
 use App\Entity\ImageProfile;
 use App\Service\UserService;
+use App\Security\UserChecker;
 use App\Entity\UpdatePassword;
 use App\Service\MailerService;
 use App\Service\SessionService;
 use App\Form\UpdatePasswordType;
+use App\Exception\LoginException;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -33,11 +36,15 @@ class UserController extends AbstractController
      */
     private $userRepo;
 
-    public function __construct(EntityManagerInterface $manager, UserRepository $userRepo, SessionService $session)
+    private $sessionI;
+
+    public function __construct(EntityManagerInterface $manager, UserRepository $userRepo, SessionService $session, SessionInterface $sessionI)
     {
         $this->manager = $manager;
         $this->userRepo = $userRepo;
+        $this->session = $session;
         $session->setSession();
+        $this->sessionI = $sessionI;
     }
 
     /**
@@ -126,34 +133,6 @@ class UserController extends AbstractController
             'errors' => $errors !== null,
             'lastUsername' => $lastUsername,
         ]);
-    }
-
-    /**
-     * @Route("/post_login", name="post_login")
-     * 
-     * @param Session $session
-     * 
-     * @return Response
-     */
-    public function postLogin(Session $session): Response 
-    {
-        $status = $this->getUser()->getTokenUser()->getStatus();
-        $username = $this->getUser()->getUsername();
-        
-        if ($status !== 'verified') {
-            if ($status === 'pending') {
-                $this->addFlash("login_error", "Vous devez valider votre compte via le lien envoyé par e-mail avant de vous connecter.");
-                return $this->redirectToRoute('logout');
-            }
-            if ($status === 'password_lost') {
-                $session->set('error_login', 'password_lost');
-                $this->addFlash("login_error", "Vous avez demandé à réinitialiser votre mot de passe, merci de suivre les instructions envoyées par e-mail.");
-                return $this->redirectToRoute('logout');
-            }
-        }
-
-        $this->addFlash("success", "Vous êtes maintenant connecté en tant que $username");
-        return $this->redirectToRoute('home');
     }
 
     /**
