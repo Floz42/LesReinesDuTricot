@@ -9,7 +9,7 @@ class TestTest extends TestCase
     public function testIfNumbersAreEquals()
     {
         $a = 5;
-        $b = 50;
+        $b = 5;
 
         $this->assertEquals($a,$b);
     }
