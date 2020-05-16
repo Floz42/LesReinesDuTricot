@@ -8,9 +8,9 @@ php:
   - '7.3'
   - '7.4'
 
-APP_ENV:
-  - test
-  
+  env:
+  - SYMFONY_VERSION="test" DB=sqlite
+
 install:
   - composer install
 
