@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr-FR');
 
-/*         $category = [];
+         $category = [];
 
         $category1 = new Category;
         $category1->setName("Eponges");
@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
                     ->setCategory($oneCategory);
             $manager->persist($product);
         }
- */     
+     
         for($u = 0; $u < 50; $u++) {
             $user = new User;
             $token = new TokenUser;
