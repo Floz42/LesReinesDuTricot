@@ -11,11 +11,13 @@ php:
 services: 
   - mysql
 
-install:
-  - composer install
+before_script:
   - php bin/console doctrine:database:create --env=test
   - php bin/console doctrine:schema:update --force --env=test
   - php bin/console doctrine:fixtures:load -n --env=test
+
+install:
+  - composer install
 
 script:
   - php bin/phpunit
