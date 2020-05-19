@@ -28,8 +28,8 @@ class ApiControllerTest extends WebTestCase
         return [
             ['/api/v1/products/show'],
             ['/api/v1/category/show'],
-            ['/api/v1/products/show/25'],
-            ['/api/v1/category/show/3'],
+            #['/api/v1/products/show/25'],
+            #['/api/v1/category/show/3'],
             ['/api/v1/products/show/last/products']
         ];
     }

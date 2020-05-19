@@ -9,10 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TokenUser
 {
-
-    /**
-     * @
-     */
+    
     const HOST = "http://127.0.0.1:8000";
 
     /**

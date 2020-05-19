@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @UniqueEntity("name")
  */
 class Category
 {
@@ -26,6 +28,7 @@ class Category
      * @ORM\Column(type="string", length=255)
      * @Groups({"products:show", "category:show", "category:create"})
      * @Assert\NotBlank(message="Le champ 'nom' ne peut pas être vide")
+     * @Assert\Length(min=3, minMessage="Le champ 'nom' doit contenir au moins 3 caractères.")
      */
     private $name;
 

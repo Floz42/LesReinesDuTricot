@@ -27,6 +27,7 @@ class Contact
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      * @Assert\Length(min=15, minMessage="Votre message doit contenir au moins 15 caractères.")
      */
     private $message;

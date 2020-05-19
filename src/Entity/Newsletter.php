@@ -16,6 +16,7 @@ class Newsletter
     /**
      * @var string
      * @Assert\NotBlank(message="Vous devez indiquer un titre à votre e-mail")
+     * @Assert\Length(min=10, minMessage="Votre titre doit contenir au moins 10 caractères")
      */
     private $title;
 

@@ -47,7 +47,6 @@ class Product
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="products", fileNameProperty="picture")
-     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      * 
      * @var File|null
      */
@@ -56,6 +55,7 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"products:show"})
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $picture;
 
@@ -74,6 +74,7 @@ class Product
     /**
      * @ORM\Column(type="integer")
      * @Groups({"products:show"})
+     * @Assert\Type(type="integer", message="Ce champ doit être un nombre entier")
      */
     private $quantity;
 
@@ -179,7 +180,7 @@ class Product
         return $this;
     }
 
-        /**
+    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
