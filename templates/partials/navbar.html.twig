@@ -1,4 +1,4 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav id="navbar" class="navbar_top navbar navbar-expand-lg navbar-dark">
   <a class="navbar-brand" href="#">LesReinesDuTricot</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
       <li class="nav-item">
         <a class="nav-link scrollTo" href="#us-item">Qui sommes nous ?</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" id="dropdown_category">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
         <div class="dropdown-menu">
             {% for cat in app.session.get('category') %}
@@ -31,7 +31,7 @@
     </ul>
     <ul class="navbar-nav ml-auto align-items-center">
       <li class="nav-item">
-        <a class="nav-link scrollTo" href="{{ path('cart_index')}}">
+        <a id="cart_logo" class="nav-link scrollTo" href="{{ path('cart_index')}}">
           <i class="fas fa-shopping-cart fa-1x" title="Votre panier"></i> 
           {% if app.session.get('totalproducts') > 0 %}
                     ( {{app.session.get('totalproducts')}} )

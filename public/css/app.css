@@ -67,6 +67,7 @@ ul {
     width: 100%;
     position: fixed !important;
     z-index: 1000;
+    height: 150px;
     top: 0;
 }
 
@@ -74,6 +75,49 @@ ul {
     width: 28px;
     height: 28px;
     border-radius: 50%;
+}
+
+#navbar ul li a {
+    font-size: 1.3em;
+    color: black;
+    font-weight: 800;
+    border-bottom: 2px solid transparent;
+}
+
+#navbar ul li a:hover {
+    color: white;
+    transition: 0.3s;
+}
+
+#navbar ul li a:hover:not(#cart_logo) {
+    border-bottom: 2px solid black;
+}
+
+#cart_logo i:hover {
+    border-bottom: 2px solid transparent !important;    
+}
+
+#dropdown_category div {
+    background-color: #ffd700;
+}
+
+#dropdown_category div a {
+    font-size: 1em !important;
+}
+#dropdown_category div a:hover {
+    background-color: #96A641 !important;
+}
+
+.navbar_scroll {
+    height: 50px !important;
+    background-color: rgb(255, 215, 0, 0.5);
+    transition: 1s;
+}
+
+.navbar_top {
+    height: 150px;
+    background-color: gold;
+    transition: 1s;
 }
 
 /************************* INTRODUCE & CAROUSEL **************************/

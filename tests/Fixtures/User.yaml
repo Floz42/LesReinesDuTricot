@@ -1,0 +1,12 @@
+App\Entity\User: 
+  user: 
+    firstname: "Florian"
+    lastname: "THIEBAUD"
+    username: "Floz42"
+    email: "admin@lol.com"
+    phoneNumber: "07.82.87.13.10"
+    address: "35 allée du pilat"
+    city: "Saint-Etienne"
+    postalCode: "42100"
+    password: "azertyuiop"
+    verifPassword: "azertyuio"
