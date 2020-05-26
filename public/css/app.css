@@ -8,6 +8,11 @@
 }
 
 @font-face {
+    font-family: "Pacifico-Regular";
+    src: url("../fonts/Pacifico-Regular.ttf") format("truetype");
+}
+
+@font-face {
     font-family: "Poppins-Bold";
     src: url("../fonts/Poppins-Bold.ttf") format("truetype");
 }
@@ -38,6 +43,10 @@ ul {
     list-style: none;
 }
 
+.font_title {
+    font-family: "Pacifico-Regular";
+}
+
 .image_rounded_medium {
     width: 200px;
     height: 200px;
@@ -60,6 +69,10 @@ ul {
 .avatar {
     width: 200px;
     height: auto;
+}
+
+.margin_navbar {
+    margin-top: 150px;
 }
 /************************* NAVBAR **************************/
 
@@ -86,11 +99,21 @@ ul {
 
 #navbar ul li a:hover {
     color: white;
-    transition: 0.3s;
 }
+
 
 #navbar ul li a:hover:not(#cart_logo) {
     border-bottom: 2px solid black;
+    animation: underline 1s forwards;
+}
+
+@keyframes underline {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
 }
 
 #cart_logo i:hover {
@@ -121,6 +144,15 @@ ul {
 }
 
 /************************* INTRODUCE & CAROUSEL **************************/
+#introduce_us {
+    background: url(../images/website/background_intro.png);
+    padding: 0.5em;
+    border-radius: 0 0 25px 25px;
+}
+
+#introduce_us .jumbotron {
+    opacity: 0.5;
+}
 
 #carouselExampleControls {
     width: 50%;
@@ -128,7 +160,12 @@ ul {
 }
 
 .carousel_img {
-    border-radius: 50px !important;
+    border-radius: 25px !important;
+}
+
+#last_products_add {
+    background-color: rgb(36, 43, 55) ;
+    border-radius: 0 0 50px 50px;
 }
 
 /************************* ABOUT US **************************/

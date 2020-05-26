@@ -6,28 +6,34 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link scrollTo" href="#home-item">Accueil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link scrollTo" href="#us-item">Qui sommes nous ?</a>
-      </li>
-      <li class="nav-item dropdown" id="dropdown_category">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
-        <div class="dropdown-menu">
-            {% for cat in app.session.get('category') %}
-              {% for key, category in cat %}
-                <a class="dropdown-item scrollTo" href="#cat-{{ key }}">{{ category }}</a>
+    {% if app.request.get('_route') == 'home' %}
+        <li class="nav-item">
+          <a class="nav-link scrollTo" href="#home-item">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link scrollTo" href="#us-item">Qui sommes nous ?</a>
+        </li>
+        <li class="nav-item dropdown" id="dropdown_category">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
+          <div class="dropdown-menu">
+              {% for cat in app.session.get('category') %}
+                {% for key, category in cat %}
+                  <a class="dropdown-item scrollTo" href="#cat-{{ key }}">{{ category }}</a>
+                {% endfor %}
               {% endfor %}
-            {% endfor %}
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link scrollTo" href="#contact-item">Contact</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link scrollTo" href="#contact-item">F.A.Q</a>
-      </li>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link scrollTo" href="#contact-item">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link scrollTo" href="#contact-item">F.A.Q</a>
+        </li>
+      {% else %}
+              <li class="nav-item">
+                <a class="nav-link scrollTo" href="{{ path('home')}}">Retour à l'accueil</a>
+            </li>
+      {% endif %}
     </ul>
     <ul class="navbar-nav ml-auto align-items-center">
       <li class="nav-item">

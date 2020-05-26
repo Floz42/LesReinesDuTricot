@@ -1,5 +1,5 @@
-<div class="container my-5">
-    <div class="jumbotron">
+<div class="container-fluid margin_navbar" id="introduce_us">
+{#     <div class="jumbotron">
         <h1 class="display-4">Bienvenue !</h1>
         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, laudantium quos! Vero earum dolores quae quam vitae eaque odit repellat, inventore aperiam iusto adipisci beatae culpa pariatur rem eligendi fuga iste, quod eum, aspernatur natus ea molestiae id libero cumque. Nam ducimus a quis dolore adipisci provident deserunt blanditiis expedita!</p>
         <hr class="my-4">
@@ -35,28 +35,40 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-{#             {% for product in lastProducts %}
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ product.picture }}" alt="{{ product.title }}">
-                        <h5 class="card-title text-center mt-2">{{ product.title }}</h5>
-                        <div class="card-body">
-                            <p class="card-text text-left">{{ product.description | slice(0, 80)}}...</p>
-                                <div>
-                                    <a href="{{ path('show_product', {id: product.id})}}" class="btn btn-primary">
+         </div>
+    </div>
+ #}
+    <div class="row mt-5">
+        <div class="col-6">
+            <h1 class="font_title text-white text-center">LesReinesDuTricot</h1>
+            <div class="h5 my-5 text-center"><i>"La qualité du produit et l'amour de l'artisan au pied de votre porte"</i></div>
+            <div class="h5 my-5 text-center">#madeinfrance #savoir-faire #idéescadeaux #bio #ecoresponsable</div>
+            <div class="text-center">
+                <a href="#contact-item" class="scrollTo btn btn-outline-info mb-5">Nous contacter</a>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-5 p-2">
+            <div class="h2 text-center my-4">Quelque chose de visuel ... #noidea</div>
+        </div>
+    </div>
+ </div>
+    <div class="row col-md-4 col-xs-8 mx-auto mb-5" id="last_products_add">
+        <div class="h4 text-white text-center mx-auto my-4">Nos derniers produits :</div>
+            <div id="carouselExampleControls" class="carousel slide mx-auto" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for product in lastProducts %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img class="carousel_img d-block w-100" src="{{ product.picture }}" alt="{{ product.title }}">
+                                <p class="my-3 text-center">
+                                    <a href="{{ path('show_product', {id: product.id})}}" class="btn btn-outline-info">
                                         <i class="fas fa-plus mr-1"></i>
                                         En savoir plus
                                     </a>
-                                </div>
+                                </p>
                         </div>
-                        <div class="card-footer justify-content-between">
-                            <p>Quantité restante : {{ product.quantity}}</p>
-                            <p>Prix : {{ product.price }}€</p> 
-                            <a href="#" class="badge badge-secondary mb-3">{{ product.category.name }}</a>
-                        </div>
-                    </div>  
+                    {% endfor %}
                 </div>
-            {% endfor %}
- #}        </div>
-    </div>
+            </div>
+        </div>
 </div>

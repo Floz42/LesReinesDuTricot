@@ -3,7 +3,7 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <div class="container my-3">
+    <div class="container margin_navbar">
         <h1>Vous inscrire :</h1>
         {{ form_start(form, {'action': path('user_subscribe')}) }}
             {{ form_widget(form) }}
