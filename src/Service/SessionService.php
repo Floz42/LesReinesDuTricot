@@ -101,7 +101,17 @@ class SessionService
 
         $this->session->set('cart', $cart);
         $this->setTotalProducts();
-
+    }
+    
+    /**
+     * ramoveAllProducts Remove all products presents in cart
+     *
+     * @return void
+     */
+    public function removeAllProducts()
+    {
+        $this->session->set('cart', []);
+        $this->setTotalProducts();
     }
     
     /**

@@ -74,6 +74,11 @@ ul {
 .margin_navbar {
     margin-top: 150px;
 }
+
+.margin_navbar_plus {
+    margin-top: 200px;
+}
+
 /************************* NAVBAR **************************/
 
 #navbar {
@@ -170,6 +175,10 @@ ul {
 
 /************************* ABOUT US **************************/
 
+#about_us {
+    background-color: #242B37;
+    color: white;
+}
 .introduce_images {
     margin-top: 2em;
     display: flex; 
@@ -184,13 +193,26 @@ ul {
 
 /************************* PRODUCTS **************************/
 
+#all_products {
+    background-color: gold;
+}
+
+.title_products {
+    font-size: 3em;
+}
+
  .cat_title {
-     font-size: 2em !important;
+    font-size: 2.5em !important;
+    text-decoration: underline;     
  }
 
  #table_products tr td, #table_category tr td, #table_users tr td  {
      vertical-align: middle !important;
  }
+
+.card_product {
+    border-radius: 25px !important;
+}
 
  /************************ PICTURES **************************/
 
@@ -198,6 +220,14 @@ ul {
     width: 80px;
     height: 80px; 
     border-radius: 50%;
+}
+
+/************************** CONTACT *************************/
+
+#contact {
+    background-color: #242B37;
+    color: white;
+    padding: 2em;
 }
 
 /************************** FAQ *************************/

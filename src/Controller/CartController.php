@@ -84,4 +84,18 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('cart_index');
     }
+
+    /**
+     * @Route("/cart/removeAll", name="cart_remove_all")
+     * 
+     * @param SessionService $sessionService
+     * 
+     * @return Response
+     */
+    public function removeAllProducts(SessionService $sessionService): Response
+    {
+        $sessionService->removeAllProducts();
+
+        return $this->redirectToRoute('cart_index');
+    }
 }

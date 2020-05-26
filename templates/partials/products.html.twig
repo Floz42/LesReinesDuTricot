@@ -1,29 +1,32 @@
-<div class="container my-3">
-    <h2 class="text-center">Tous nos produits :</h2>
+<div class="container-fluid p-5" id="all_products">
+    <h2 class="text-left font_title title_products">Tous produits :</h2>
+    <h5><i>Toutes nos réalisations sont confectionnés main et réalisés avec amour. Pour plus d'informations vous pouvez vous référez aux sections "Contact" et "FAQ" en bas de page.</i></h5>
     {% for cat in category %}
-        <div class="cat_title my-5 text-center alert alert-secondary" id="cat-{{cat.id}}">{{ cat.name }} :</div>
+        <div class="cat_title my-3 text-center font_title" id="cat-{{cat.id}}">{{ cat.name }} :</div>
         <div class="one_category mx-auto row my-3">
             {% for product in products %}
                 {% if product.category == cat %}
                     <div class="col-md-4 col-xs-12 my-3">
                         <div data-aos="zoom-in" class="h-100">
-                            <div class="mx-auto card h-100" style="width: 18rem;">
-                                <img class="card-img-top" src="{{ product.picture }}" alt="{{ product.title }}">
+                            <div class="mx-auto card h-100 card_product p-1" style="width: 18rem;">
+                                <img class="card-img-top card_product" src="{{ product.picture }}" alt="{{ product.title }}">
                                 <h5 class="card-title text-center mt-2">{{ product.title }}</h5>
                                 <div class="card-body">
                                     <p class="card-text text-justify">{{ product.description | slice(0, 80)}}...</p>
-                                    <a href="{{ path('show_product', {id: product.id})}}" class="btn btn-primary">
-                                        <i class="fas fa-plus mr-1"></i>
-                                        En savoir plus
-                                    </a>
                                 </div>
                                 <div class="card-footer justify-content-between">
                                     <p>Quantité restante : {{ product.quantity}}</p>
-                                    <p>Prix : {{ product.price }}€</p> 
-                                    <a href="{{ path('cart_add', {'id': product.id })}}" class="btn btn-success"> 
-                                        <i class="fas fa-shopping-cart mr-1"></i>
-                                        Ajouter
-                                    </a>
+                                    <p>Prix : {{ product.price }}€</p>
+                                    <div class="row">
+                                        <a href="{{ path('cart_add', {'id': product.id })}}" class="btn btn-outline-success"> 
+                                            <i class="fas fa-shopping-cart mr-1"></i>
+                                            Ajouter
+                                        </a>
+                                        <a href="{{ path('show_product', {id: product.id})}}" class="ml-2 btn btn-outline-primary">
+                                            <i class="fas fa-plus mr-1"></i>
+                                            En savoir plus
+                                        </a>
+                                    </div> 
                                 </div>
                             </div>  
                         </div>

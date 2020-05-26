@@ -3,8 +3,8 @@
 {% block title %}Votre panier{% endblock %}
 
 {% block body %}
-    <div class="container col-md-10 col-xs-12">
-        <h1 class="my-3 text-center">Votre panier :</h1>
+    <div class="container margin_navbar_plus col-md-10 col-xs-12">
+        <h1 class="text-left font_title mb-4">Voici votre panier :</h1>
         {% if items | length > 0 %}
             <table class="table table-striped table-hover">
                 <thead>
@@ -39,14 +39,24 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="row ml-auto">
+            <a href="" class="ml-auto btn btn-outline-success">
+                <i class="fas fa-check"></i>
+                Commander
+            </a>
+            <a href="{{ path("cart_remove_all")}}" class="ml-2 btn btn-outline-danger">
+                <i class="fas fa-times"></i>
+                Vider le panier
+            </a>
+            </div>
         {% else %}
             <div class="alert alert-warning col-8 text-center mx-auto">
                 Votre panier est vide
             </div>            
         {% endif %}
-    <a href="{{ path('home')}}">
-        <i class="fas fa-arrow-left"></i>
-        Retour à la liste des produits
-    </a>
+        <a href="{{ path('home')}}">
+            <i class="fas fa-arrow-left mb-5"></i>
+            Retour à la liste des produits
+        </a>
     </div>
 {% endblock %}
