@@ -14,7 +14,7 @@ class ImageProfileType extends AbstractType
     {
         $builder
             ->add('imageFile', FileType::class, [
-                'label' => 'Photo de profil :',
+                'label' => 'Photo de profil (optionnel)',
                 'required' => false,
             ])
         ;

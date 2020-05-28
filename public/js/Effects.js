@@ -2,6 +2,7 @@ class Effects {
     constructor() {
         this.scrollTo_anchor();
         this.navbar_onScroll();
+        this.reduce_navbar();
     }
 
     /** 
@@ -20,16 +21,26 @@ class Effects {
      */
     navbar_onScroll() {
         $(window).scroll(function() {
-            if ($(this).scrollTop() > 200) {
-                $('#navbar').addClass('navbar_scroll');
-                $('#navbar').removeClass('navbar_top');  
-                $('#navbar div ul li a').css({'font-size': '1em', 'transition': '1s'});  
-            } else {
-                $('#navbar').removeClass('navbar_scroll');
-                $('#navbar').addClass('navbar_top');    
-                $('#navbar div ul li a').css('font-size', '1.3em');  
+            if (document.location.pathname === '/') {
+                if ($(this).scrollTop() > 200) {
+                    $('#navbar').addClass('navbar_scroll');
+                    $('#navbar').removeClass('navbar_top');  
+                    $('#navbar div ul li a').css({'font-size': '1em', 'transition': '1s'});  
+                } else {
+                    $('#navbar').removeClass('navbar_scroll');
+                    $('#navbar').addClass('navbar_top');    
+                    $('#navbar div ul li a').css('font-size', '1.3em');  
+                }
             }
         });
+    }
+
+    reduce_navbar() {
+        if (document.location.pathname !== '/') {
+            $('#navbar').addClass('navbar_scroll');
+            $('#navbar').removeClass('navbar_top');  
+            $('#navbar div ul li a').css({'font-size': '1em'});  
+        }
     }
 }
 

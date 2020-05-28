@@ -21,25 +21,25 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, ['label' => '*Pseudo :'])
-            ->add('firstname', TextType::class, ['label' => '*Prénom :'])
-            ->add('lastname', TextType::class, ['label' => "*Nom :"])
-            ->add('email', EmailType::class, ['label' => '*E-mail :'])
-            ->add('phoneNumber', TextType::class, ['label' => '*Téléphone :'])
-            ->add('password', PasswordType::class, ['label' => '*Mot de passe :'])
-            ->add('verifPassword', PasswordType::class, ['label' => '*Vérification (mot de passe) :'])
+            ->add('username', TextType::class, ['label' => 'Pseudo *'])
+            ->add('firstname', TextType::class, ['label' => 'Prénom *'])
+            ->add('lastname', TextType::class, ['label' => "Nom *"])
+            ->add('email', EmailType::class, ['label' => 'E-mail *'])
+            ->add('phoneNumber', TextType::class, ['label' => 'Téléphone *'])
+            ->add('password', PasswordType::class, ['label' => 'Mot de passe (7 caractères minimum) *'])
+            ->add('verifPassword', PasswordType::class, ['label' => 'Vérification (mot de passe) *'])
             ->add('imageProfile', ImageProfileType::class, [
                 'data_class' => ImageProfile::class,
                 'translation_domain' => 'forms',
                 'required' => false,
                 'label' => false
             ])
-            ->add('address', TextType::class, ['label' => '*Addresse :'])
-            ->add('city', TextType::class, ['label' => '*Ville :'])
-            ->add('postalCode', NumberType::class, ['label' => '*Code postale :'])
+            ->add('address', TextType::class, ['label' => 'Addresse *'])
+            ->add('city', TextType::class, ['label' => 'Ville *'])
+            ->add('postalCode', NumberType::class, ['label' => 'Code postale *'])
             ->add('receiveNewsLetter', CheckboxType::class, [
                 'required' => false,
-                'label' => "S'inscrire à la Newsletter des ReinesDuTricot (exclusivement) ?",
+                'label' => "S'inscrire à la Newsletter des ReinesDuTricot ?",
                 'attr'=> [
                     'checked' => true
                     ]

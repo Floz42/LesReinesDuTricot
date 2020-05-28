@@ -30,6 +30,11 @@ html {
     max-width: 100%;
     overflow-x: hidden;
 }
+
+body, html {
+    min-height: 100%;
+}
+
 body {
     font-family: "Poppins" !important;
     font-size: 2em;
@@ -79,6 +84,14 @@ ul {
     margin-top: 200px;
 }
 
+.margin_navbar_light {
+    margin-top: 50px;
+}
+
+.alert-success {
+    border-radius: 25px !important;
+}
+
 /************************* NAVBAR **************************/
 
 #navbar {
@@ -100,16 +113,16 @@ ul {
     color: black;
     font-weight: 800;
     border-bottom: 2px solid transparent;
+    padding-bottom: 0px !important;
 }
 
 #navbar ul li a:hover {
     color: white;
 }
 
-
-#navbar ul li a:hover:not(#cart_logo) {
+#navbar ul li a:hover:not(#cart_logo):not(#accountDropdownLink) {
     border-bottom: 2px solid black;
-    animation: underline 1s forwards;
+    transition: underline 500ms forwards;
 }
 
 @keyframes underline {
@@ -125,14 +138,14 @@ ul {
     border-bottom: 2px solid transparent !important;    
 }
 
-#dropdown_category div {
+.dropdown_category div {
     background-color: #ffd700;
 }
 
-#dropdown_category div a {
+.dropdown_category div a {
     font-size: 1em !important;
 }
-#dropdown_category div a:hover {
+.dropdown_category div a:hover {
     background-color: #96A641 !important;
 }
 
@@ -145,10 +158,11 @@ ul {
 .navbar_top {
     height: 150px;
     background-color: gold;
-    transition: 1s;
+    transition: 0.5s;
 }
 
 /************************* INTRODUCE & CAROUSEL **************************/
+
 #introduce_us {
     background: url(../images/website/background_intro.png);
     padding: 0.5em;
@@ -179,6 +193,7 @@ ul {
     background-color: #242B37;
     color: white;
 }
+
 .introduce_images {
     margin-top: 2em;
     display: flex; 
@@ -214,6 +229,12 @@ ul {
     border-radius: 25px !important;
 }
 
+.card-footer {
+    background-color: #242B37 !important;
+    color: white;
+    border-radius: 0 0 25px 25px !important;
+}
+
  /************************ PICTURES **************************/
 
 .mini_picture {
@@ -224,7 +245,7 @@ ul {
 
 /************************** CONTACT *************************/
 
-#contact {
+#contact, #form_subscribe, #form_submit, #profile_user, #form_updatePassword {
     background-color: #242B37;
     color: white;
     padding: 2em;
@@ -238,6 +259,12 @@ ul {
 
 .arrow_question:hover {
     color: rgb(28, 128, 241) !important;
+}
+
+ /************************ FORM SUBSCRIBE **************************/
+
+#form_subscribe, #form_submit, #profile_user, #form_updatePassword {
+    border-radius: 25px;
 }
 
  /************************ FOOTER **************************/
