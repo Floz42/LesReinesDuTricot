@@ -38,7 +38,8 @@ class ProductsController extends AbstractController
     public function index(PaginationService $pagination, $page = 1): Response
     {
         $pagination->setEntityClass(Product::class)
-                    ->setCurrentPage($page);
+                    ->setCurrentPage($page)
+                    ->setOrderBy(['quantity' => 'ASC']);
 
         return $this->render('admin/products/show.html.twig', [
             'pagination' => $pagination

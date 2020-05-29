@@ -4,6 +4,8 @@ namespace App\Service;
 
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionService 
@@ -22,6 +24,8 @@ class SessionService
      * @var ProductRepository
      */ 
     private $productRepo;
+
+    private $requestStack;
     
     /**
      * __construct
@@ -29,11 +33,12 @@ class SessionService
      * @param  SessionInterface $session
      * @return void
      */
-    public function __construct(SessionInterface $session, CategoryRepository $categoryRepo, ProductRepository $productRepo)
+    public function __construct(SessionInterface $session, CategoryRepository $categoryRepo, ProductRepository $productRepo, RequestStack $requestStack)
     {
         $this->session = $session;
         $this->categoryRepo = $categoryRepo;
         $this->productRepo = $productRepo;
+        $this->requestStack = $requestStack;
     }
     
     /**
@@ -102,6 +107,19 @@ class SessionService
         $this->session->set('cart', $cart);
         $this->setTotalProducts();
     }
+
+    public function updateProduct(int $id)
+    {
+        $cart = $this->session->get('cart', []);
+        $newQuantity = $this->requestStack->getMasterRequest()->request->get("valeur");
+        if ($newQuantity > $cart[$id]) {
+            $this->addProduct($id);
+            dump($newQuantity);
+        } 
+        if($newQuantity < $cart[$id]) {
+            $this->removeProduct($id);
+        }
+    } 
     
     /**
      * ramoveAllProducts Remove all products presents in cart
@@ -164,5 +182,21 @@ class SessionService
         }
 
          $this->session->set('totalproducts', $total);
+    }
+    
+    /**
+     * verifyProductQuantityIsAvailable
+     *
+     * @return array
+     */
+    public function verifyProductQuantityIsAvailable(): array
+    {
+        $notAvailable = [];
+        foreach($this->getFullCart() as $product) {
+            if ($product["product"]->getQuantity() < $product['quantity']) {
+                $notAvailable[] = ["title" => $product["product"]->getTitle(), 'quantity' => $product["product"]->getQuantity()];
+            } 
+        }
+        return $notAvailable;
     }
 }

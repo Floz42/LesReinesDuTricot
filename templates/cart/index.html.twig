@@ -5,6 +5,12 @@
 {% block body %}
     <div class="container margin_navbar_light col-md-10 col-xs-12">
         <h1 class="text-left font_title mb-4">Voici votre panier :</h1>
+        {% for error in errors %}
+            <div class="alert alert-danger col-md-8 col-xs-10 mx-auto text-center">
+                Il n'y a pas assez de <strong>{{ error.title }}</strong> (quantité disponible : {{ error.quantity }}).
+                Merci de modifier votre commande.
+            </div>
+        {% endfor %}
         {% if items | length > 0 %}
             <table class="table table-striped table-hover">
                 <thead>
@@ -21,7 +27,7 @@
                         <tr>
                             <td>{{ item.product.title }}</td>
                             <td>{{ item.product.price }} €</td>
-                            <td>{{ item.quantity }}</td>
+                            <td><input class="cart_product_quantity" data-id="{{ item.product.id }}" type="number" min="0" max="{{ item.product.quantity }}" value="{{ item.quantity }}"></td>
                             <td>{{ item.product.price * item.quantity}} €</td>
                             <td>
                                 <a href="{{ path('cart_remove', {'id': item.product.id })}}" class="btn btn-danger btn-sm">
@@ -39,12 +45,14 @@
                     </tr>
                 </tfoot>
             </table>
-            <div class="row ml-auto">
-            <a href="" class="ml-auto btn btn-outline-success">
-                <i class="fas fa-check"></i>
-                Commander
-            </a>
-            <a href="{{ path("cart_remove_all")}}" class="ml-2 btn btn-outline-danger">
+            <div class="row d-flex justify-content-end">
+            {% if errors|length < 1 %}
+                <a href="" class="mr-2 btn btn-outline-success">
+                    <i class="fas fa-check"></i>
+                    Commander
+                </a>
+            {% endif %}
+            <a href="{{ path("cart_remove_all")}}" class="btn btn-outline-danger">
                 <i class="fas fa-times"></i>
                 Vider le panier
             </a>
@@ -59,4 +67,24 @@
             Retour à la liste des produits
         </a>
     </div>
+
+{% endblock %}
+{% block javascripts %}
+<script>
+
+    $(".cart_product_quantity").change(function() {
+        let id = $(this).data("id");
+        let value = $(this).val();
+        console.log(value);
+        $.ajax({
+            method: 'POST',
+            url: '/cart/update/' + id,
+            data: {'valeur': value},
+            success: function() {
+                window.location.reload();
+            }
+        });
+    });
+
+</script>    
 {% endblock %}

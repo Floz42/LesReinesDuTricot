@@ -46,12 +46,15 @@ class CartController extends AbstractController
     public function index(SessionService $sessionService): Response
     {
         $cartWithData = $sessionService->getFullCart();
-        $total = $sessionService->getTotal();
 
+        $productsNotAvailables = $sessionService->verifyProductQuantityIsAvailable();
+
+        $total = $sessionService->getTotal();
 
         return $this->render('cart/index.html.twig', [
             'items' => $cartWithData,
-            'total' => $total
+            'total' => $total,
+            'errors' => $productsNotAvailables
         ]);
     }
 
@@ -82,6 +85,19 @@ class CartController extends AbstractController
     {
         $sessionService->removeProduct($id);
 
+        return $this->redirectToRoute('cart_index');
+    }
+
+    /**
+     * @Route("/cart/update/{id}", name="cart_update_product")
+     * 
+     * @param int $id
+     * 
+     * @return Response
+     */
+    public function update(SessionService $sessionService, int $id, Request $request): Response
+    {
+        $sessionService->updateProduct($id);
         return $this->redirectToRoute('cart_index');
     }
 

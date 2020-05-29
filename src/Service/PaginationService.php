@@ -20,6 +20,11 @@ class PaginationService
     private $limit = 10;
 
     /**
+     * @var Array
+     */
+    private $orderBy = [];
+
+    /**
      * @var Int
      */
     private $currentPage = 1;
@@ -103,7 +108,18 @@ class PaginationService
         $offset = $this->currentPage * $this->limit - $this->limit;
         return $this->manager
                 ->getRepository($this->entityClass)
-                ->findBy([], [], $this->limit, $offset);
+                ->findBy([], $this->orderBy, $this->limit, $offset);
+    }
+
+    public function setOrderBy(array $orderBy): self
+    {
+        $this->orderBy = $orderBy;
+        return $this;
+    }
+
+    public function getOrderBy(): array
+    {
+        return $this->orderBy;
     }
 
     public function setCurrentPage(int $page): self
