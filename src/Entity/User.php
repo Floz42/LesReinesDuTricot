@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -130,6 +132,16 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\ImageProfile", mappedBy="user", cascade={"persist", "remove"})
      */
     private $imageProfile;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="user")
+     */
+    private $commands;
+
+    public function __construct()
+    {
+        $this->commands = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -406,6 +418,37 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($imageProfile->getUser() !== $this) {
             $imageProfile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Command[]
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommand(Command $command): self
+    {
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
+            // set the owning side to null (unless already changed)
+            if ($command->getUser() === $this) {
+                $command->setUser(null);
+            }
         }
 
         return $this;

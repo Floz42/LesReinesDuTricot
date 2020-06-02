@@ -72,13 +72,32 @@
                     <tr>
                         <td>Date</td>
                         <td>Numéro de commande</td>
+                        <td>Status</td>
                         <td>Total (TTC)</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="3" class="text-center"><i>Aucune commande pour le moment</i></td>
-                    </tr>
+                    {% if user.commands|length == 0 %}
+                        <tr>
+                            <td colspan="3" class="text-center"><i>Aucune commande pour le moment</i></td>
+                        </tr>
+                    {% else %}
+                        {% for command in user.commands %}
+                                <tr>
+                                    <td>{{ command.createdAt | date('d/m/Y')}}</td>
+                                    <td><a href="{{ path('command_show', {id: command.id})}}">{{ command.numberCommand }}</a></td>
+                                    <td>
+                                        {% if command.status == "waiting" %}
+                                            <span class="badge badge-warning">En attente</span>
+                                        {% elseif command.status == "addressed" %}
+                                            <span class="badge badge-success">Traîtée</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ command.total }}€</td>
+                                </tr>
+                            </a>                            
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>
