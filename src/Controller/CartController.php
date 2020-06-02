@@ -29,11 +29,10 @@ class CartController extends AbstractController
      * @param  ProductRepository $productRepo
      * @return void
      */
-    public function __construct(ProductRepository $productRepo, EntityManagerInterface $manager, SessionService $session)
+    public function __construct(ProductRepository $productRepo, EntityManagerInterface $manager)
     {
         $this->productRepo = $productRepo;
         $this->manager = $manager;
-        $session->setSession();
     }
 
     /**

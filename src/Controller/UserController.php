@@ -7,18 +7,15 @@ use App\Form\UserType;
 use App\Entity\TokenUser;
 use App\Entity\ImageProfile;
 use App\Service\UserService;
-use App\Security\UserChecker;
 use App\Entity\UpdatePassword;
 use App\Service\MailerService;
 use App\Service\SessionService;
 use App\Form\UpdatePasswordType;
-use App\Exception\LoginException;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -36,15 +33,10 @@ class UserController extends AbstractController
      */
     private $userRepo;
 
-    private $sessionI;
-
-    public function __construct(EntityManagerInterface $manager, UserRepository $userRepo, SessionService $session, SessionInterface $sessionI)
+    public function __construct(EntityManagerInterface $manager, UserRepository $userRepo)
     {
         $this->manager = $manager;
         $this->userRepo = $userRepo;
-        $this->session = $session;
-        $session->setSession();
-        $this->sessionI = $sessionI;
     }
 
     /**

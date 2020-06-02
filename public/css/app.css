@@ -245,7 +245,7 @@ ul {
 
 /************************** CONTACT *************************/
 
-#contact, #form_subscribe, #form_submit, #profile_user, #form_updatePassword {
+#contact, #form_subscribe, #form_submit, #profile_user, #form_updatePassword, #unregistered_user {
     background-color: #242B37;
     color: white;
     padding: 2em;
@@ -263,7 +263,7 @@ ul {
 
  /************************ FORM SUBSCRIBE **************************/
 
-#form_subscribe, #form_submit, #profile_user, #form_updatePassword {
+#form_subscribe, #form_submit, #profile_user, #form_updatePassword, #unregistered_user {
     border-radius: 25px;
 }
 

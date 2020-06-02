@@ -96,7 +96,6 @@ class SessionService
     public function removeProduct(int $id)
     {
         $cart = $this->session->get('cart', []);
-
         unset($cart[$id]);
 
         $this->session->set('cart', $cart);
