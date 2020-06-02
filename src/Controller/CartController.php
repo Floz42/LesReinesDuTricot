@@ -95,7 +95,7 @@ class CartController extends AbstractController
      * 
      * @return Response
      */
-    public function update(SessionService $sessionService, int $id, Request $request): Response
+    public function update(SessionService $sessionService, int $id): Response
     {
         $sessionService->updateProduct($id);
         return $this->redirectToRoute('cart_index');

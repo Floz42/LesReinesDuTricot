@@ -5,6 +5,7 @@
 {% block body %}
     <div class="container margin_navbar_light col-md-10 col-xs-12">
         <h1 class="text-left font_title mb-4">Voici votre panier :</h1>
+        <div id="update_success"></div>
         {% for error in errors %}
             <div class="alert alert-danger col-md-8 col-xs-10 mx-auto text-center">
                 Il n'y a pas assez de <strong>{{ error.title }}</strong> (quantité disponible : {{ error.quantity }}).
@@ -67,24 +68,4 @@
             Retour à la liste des produits
         </a>
     </div>
-
-{% endblock %}
-{% block javascripts %}
-<script>
-
-    $(".cart_product_quantity").change(function() {
-        let id = $(this).data("id");
-        let value = $(this).val();
-        console.log(value);
-        $.ajax({
-            method: 'POST',
-            url: '/cart/update/' + id,
-            data: {'valeur': value},
-            success: function() {
-                window.location.reload();
-            }
-        });
-    });
-
-</script>    
 {% endblock %}

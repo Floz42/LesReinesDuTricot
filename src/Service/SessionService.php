@@ -97,28 +97,29 @@ class SessionService
     {
         $cart = $this->session->get('cart', []);
 
-        if(!empty($cart[$id])) {
-            $cart[$id]--;
-        } 
-        if ($cart[$id] === 0) {
-            unset($cart[$id]);
-        }
+        unset($cart[$id]);
 
         $this->session->set('cart', $cart);
         $this->setTotalProducts();
     }
-
+    
+    /**
+     * updateProduct -> update a product in cart section
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function updateProduct(int $id)
     {
         $cart = $this->session->get('cart', []);
+
         $newQuantity = $this->requestStack->getMasterRequest()->request->get("valeur");
-        if ($newQuantity > $cart[$id]) {
-            $this->addProduct($id);
-            dump($newQuantity);
-        } 
-        if($newQuantity < $cart[$id]) {
-            $this->removeProduct($id);
+        $cart[$id] = $newQuantity;
+        if ($cart[$id] == 0) {
+            unset($cart[$id]);
         }
+        $this->session->set('cart', $cart);
+        $this->setTotalProducts();    
     } 
     
     /**
@@ -191,11 +192,18 @@ class SessionService
      */
     public function verifyProductQuantityIsAvailable(): array
     {
+        $cart = $this->session->get('cart', []);
+
         $notAvailable = [];
-        foreach($this->getFullCart() as $product) {
-            if ($product["product"]->getQuantity() < $product['quantity']) {
-                $notAvailable[] = ["title" => $product["product"]->getTitle(), 'quantity' => $product["product"]->getQuantity()];
-            } 
+        foreach($this->getFullCart() as $key => $product) {
+            if ($product["product"]) {
+                if ($product["product"]->getQuantity() < $product['quantity']) {
+                    $notAvailable[] = ["title" => $product["product"]->getTitle(), 'quantity' => $product["product"]->getQuantity()];
+                } 
+            } else {
+                $this->session->set('cart', []);
+                $this->setTotalProducts();
+            }
         }
         return $notAvailable;
     }
