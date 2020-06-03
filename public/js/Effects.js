@@ -25,7 +25,7 @@ class Effects {
                 if ($(this).scrollTop() > 200) {
                     $('#navbar').addClass('navbar_scroll');
                     $('#navbar').removeClass('navbar_top');  
-                    $('#navbar div ul li a').css({'font-size': '1em', 'transition': '1s'});  
+                    $('#navbar div ul li a').css({'font-size': '1em', 'transition': '0.5s'});  
                 } else {
                     $('#navbar').removeClass('navbar_scroll');
                     $('#navbar').addClass('navbar_top');    

@@ -82,7 +82,7 @@
                             <td colspan="3" class="text-center"><i>Aucune commande pour le moment</i></td>
                         </tr>
                     {% else %}
-                        {% for command in user.commands %}
+                        {% for command in user.commands|reverse %}
                                 <tr>
                                     <td>{{ command.createdAt | date('d/m/Y')}}</td>
                                     <td><a href="{{ path('command_show', {id: command.id})}}">{{ command.numberCommand }}</a></td>

@@ -18,6 +18,7 @@
                     <th>Prix</th>
                     <th>Catégorie</th>
                     <th>Quantité</th>
+                    <th>Visible</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -38,12 +39,10 @@
                                 {{ product.quantity }} 
                             {% endif %}
                         </td>
+                        <td>{{ product.visible == 1 ? 'Oui' : 'Non' }}</td>
                         <td>
                             <a href="{{ path('admin_products_update', {id: product.id})}}" class="btn btn-primary mb-2">
                                 <i class="fas fa-pen" title="Modifier"></i>
-                            </a>
-                            <a href="{{ path('admin_products_delete', {id: product.id})}}" class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
                             </a>
                         </td>
                     </tr>

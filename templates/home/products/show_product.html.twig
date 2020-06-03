@@ -23,15 +23,19 @@
                     </tr>
 
                 </table>
-                <div class="row mb-5">
+                <div class="mb-5">
                     <a href="{{ path('home')}}" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left mr-1"></i>
                         Retour
                     </a>
+                    {% if product.quantity == 0 %}
+                        <p class="alert alert-danger text-center mt-2">Indisponible</p>
+                    {% else %}
                     <a href="{{ path('cart_add', {'id': product.id })}}" class="ml-2 btn btn-outline-success">
                         <i class="fas fa-plus mr-1"></i>
                         Ajouter au panier
-                    </a> 
+                    </a>
+                    {% endif %} 
                 </div>
             </div>
             <div class="col-md-6 mb-5 my-auto">

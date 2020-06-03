@@ -76,6 +76,10 @@ ul {
     height: auto;
 }
 
+.avatar_rounded {
+    border-radius: 50%;
+}
+
 .margin_navbar {
     margin-top: 150px;
 }
@@ -118,11 +122,11 @@ ul {
 
 #navbar ul li a:hover {
     color: white;
+    transition: 0.2s;‚
 }
 
 #navbar ul li a:hover:not(#cart_logo):not(#accountDropdownLink) {
-    border-bottom: 2px solid black;
-    transition: underline 500ms forwards;
+    
 }
 
 @keyframes underline {

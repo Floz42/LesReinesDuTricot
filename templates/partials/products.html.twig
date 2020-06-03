@@ -5,7 +5,7 @@
         <div class="cat_title my-3 text-center font_title" id="cat-{{cat.id}}">{{ cat.name }} :</div>
         <div class="one_category mx-auto row my-3">
             {% for product in products %}
-                {% if product.category == cat %}
+                {% if product.category == cat and product.visible == 1 %}
                     <div class="col-md-4 col-xs-12 my-3">
                         <div data-aos="zoom-in" class="h-100">
                             <div class="mx-auto card h-100 card_product p-1" style="width: 18rem;">
@@ -17,12 +17,16 @@
                                 <div class="card-footer justify-content-between">
                                     <p>Quantité restante : {{ product.quantity}}</p>
                                     <p>Prix : {{ product.price }}€</p>
-                                    <div class="row">
-                                        <a href="{{ path('cart_add', {'id': product.id })}}" class="btn btn-outline-success"> 
-                                            <i class="fas fa-shopping-cart mr-1"></i>
+                                    <div class="row mx-auto">
+                                        {% if product.quantity == 0 %}
+                                            <p class="col-10 alert alert-danger text-center mx-auto my-0">Indisponible</p>
+                                        {% else %}
+                                        <a href="{{ path('cart_add', {'id': product.id })}}" class="mx-auto col-10 btn btn-outline-success"> 
+                                            <i class="fas fa-shopping-cart"></i>
                                             Ajouter
                                         </a>
-                                        <a href="{{ path('show_product', {id: product.id})}}" class="ml-2 btn btn-outline-primary">
+                                        {% endif %}
+                                        <a href="{{ path('show_product', {id: product.id})}}" class="mt-2 mx-auto col-10 btn btn-outline-primary">
                                             <i class="fas fa-plus mr-1"></i>
                                             En savoir plus
                                         </a>

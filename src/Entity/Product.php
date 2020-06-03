@@ -78,6 +78,16 @@ class Product
      */
     private $quantity;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $sold;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visible;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -203,6 +213,30 @@ class Product
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    public function getSold(): ?int
+    {
+        return $this->sold;
+    }
+
+    public function setSold(?int $sold): self
+    {
+        $this->sold = $sold;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
+
+        return $this;
     }
 
 }
