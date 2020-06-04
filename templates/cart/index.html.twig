@@ -3,7 +3,7 @@
 {% block title %}Votre panier{% endblock %}
 
 {% block body %}
-    <div class="container margin_navbar_light col-md-10 col-xs-12">
+    <div class="container col-md-10 col-xs-12">
         <h1 class="text-left font_title mb-4">Voici votre panier :</h1>
         <div id="update_success"></div>
         {% for error in errors %}
@@ -59,7 +59,7 @@
             </a>
             </div>
         {% else %}
-            <div class="alert alert-warning col-8 text-center mx-auto">
+            <div class="alert alert-warning col-8 my-5 text-center mx-auto">
                 Votre panier est vide
             </div>            
         {% endif %}
@@ -67,5 +67,6 @@
             <i class="fas fa-arrow-left mb-5"></i>
             Retour à la liste des produits
         </a>
+    </div>
     </div>
 {% endblock %}

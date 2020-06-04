@@ -1,11 +1,218 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
-<div class="conatiner my-3">
-    <h1 class="text-center">Bienvenue sur l'adminisration de votre site !</h1>
-
-    <h3 class="text-center">TODO - Ici seront présentes des données statistiques de la base de donnée (nombre de produits dispo ...)</h3>
-
+<div class="container-fluid my-3">
+    <h1 class="text-center mb-5">Bienvenue sur l'adminisration de votre site !</h1>
+    <div class="row mx-auto d-flex justify-content-center">
+        <div class="card text-white bg-primary m-3 col-xs-12" style="max-width: 18rem;">
+            <div class="card-header text-center">Nombre d'utilisateur inscrits</div>
+            <div class="card-body">
+                <p class="card-text">
+                    <h2 class="text-center">
+                        <i class="fas fa-user mr-2"></i>
+                        {{ stats.users }}
+                    </h2>
+                </p>
+            </div>
+        </div>
+        <div class="card text-white bg-success m-3 col-xs-12" style="max-width: 18rem;">
+            <div class="card-header text-center">Nombre de produits</div>
+            <div class="card-body">
+                <p class="card-text">
+                    <h2 class="text-center">
+                        <i class="fas fa-bolt mr-2"></i>
+                        {{ stats.products }}
+                    </h2>
+                </p>
+            </div>
+        </div>
+        <div class="card text-white bg-warning m-3 col-xs-12" style="max-width: 18rem;">
+            <div class="card-header text-center">Nombre de commandes</div>
+            <div class="card-body">
+                <p class="card-text">
+                    <h2 class="text-center">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        {{ stats.commands }}
+                    </h2>
+                </p>
+            </div>
+        </div>
+        <div class="card text-white bg-info m-3 col-xs-12" style="max-width: 18rem;">
+            <div class="card-header text-center">Stock total </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <h2 class="text-center">
+                        <i class="fas fa-battery-full mr-2"></i>
+                        {{ stats.quantityProducts }}
+                    </h2>
+                </p>
+            </div>
+        </div>
+        <div class="card text-white bg-secondary m-3 col-xs-12" style="max-width: 18rem;">
+            <div class="card-header">Panier moyen</div>
+            <div class="card-body">
+                <p class="card-text">
+                    <h2 class="text-center">
+                        <i class="fas fa-euro-sign mr-2"></i>
+                        {{ stats.averageCard | round(1) }}
+                    </h2>
+                </p>
+            </div>
+        </div>
+        <div class="card text-white bg-info m-3 col-xs-12" style="max-width: 18rem;">
+            <div class="card-header">Nombre de produits vendus</div>
+            <div class="card-body">
+                <p class="card-text">
+                    <h2 class="text-center">
+                        <i class="fas fa-award mr-2"></i>
+                        {{ stats.totalProductsSold }}
+                    </h2>
+                </p>
+            </div>
+        </div>
+        <div class="card text-white bg-success m-3 col-xs-12" style="max-width: 18rem;">
+            <div class="card-header">Chiffre d'affaires</div>
+            <div class="card-body">
+                <p class="card-text">
+                    <h2 class="text-center">
+                        <i class="fas fa-file-invoice-dollar mr-2"></i>
+                        {{ stats.revenue }}€
+                    </h2>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-xs-12">
+            <div class="card text-white bg-primary m-3">
+                <div class="card-header">
+                    <i class="fas fa-arrow-up mr-2"></i>
+                    Les 3 meilleures ventes 
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2 class="text-center">
+                            <table class="table text-white">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Nombre de ventes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in stats.bestProducts %}
+                                    <tr>
+                                        <td style="width:40%">{{ item.title }}</td>
+                                        <td>{{ item.price }}€</td>
+                                        <td>{{ item.sold }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </h2>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-xs-12">
+            <div class="card text-white bg-danger m-3">
+                <div class="card-header">
+                    <i class="fas fa-arrow-down mr-2"></i>
+                    Les 3 pires ventes 
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2 class="text-center">
+                            <table class="table text-white">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Nombre de ventes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in stats.worstProducts %}
+                                    <tr>
+                                        <td style="width:40%">{{ item.title }}</td>
+                                        <td>{{ item.price }}€</td>
+                                        <td>{{ item.sold == NULL ? '0' : item.sold }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </h2>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-xs-12">
+            <div class="card text-white bg-warning m-3">
+                <div class="card-header">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                    Produits avec peu de stock (3 ou moins) 
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2 class="text-center">
+                            <table class="table text-white">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Quantité</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in stats.lowProductsCount %}
+                                    {% if item.visible == 1 %}
+                                        <tr>
+                                            <td style="width:40%">{{ item.title }}</td>
+                                            <td>{{ item.price }}€</td>
+                                            <td>{{ item.quantity }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </h2>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-xs-12">
+            <div class="card text-white bg-success m-3">
+                <div class="card-header">
+                    <i class="fas fa-kiss-wink-heart mr-2 fa-2x"></i>
+                    Les 5 meilleurs acheteurs
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2 class="text-center">
+                            <table class="table text-white">
+                                <thead>
+                                    <tr>
+                                        <th>Pseudonyme</th>
+                                        <th>Nombre de commandes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in stats.bestBuyers %}
+                                    <tr>
+                                        <td>{{ item.user }}</td>
+                                        <td>{{ item.commands }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </h2>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}

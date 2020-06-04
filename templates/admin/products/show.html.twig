@@ -19,6 +19,7 @@
                     <th>Catégorie</th>
                     <th>Quantité</th>
                     <th>Visible</th>
+                    <th>Vendu(s)</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
                             {% endif %}
                         </td>
                         <td>{{ product.visible == 1 ? 'Oui' : 'Non' }}</td>
+                        <td class="text-center">{{ product.sold > 0 ? product.sold : 'Aucun'}}</td>
                         <td>
                             <a href="{{ path('admin_products_update', {id: product.id})}}" class="btn btn-primary mb-2">
                                 <i class="fas fa-pen" title="Modifier"></i>
